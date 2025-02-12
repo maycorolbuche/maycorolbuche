@@ -148,6 +148,12 @@ ul.menu li {
     margin-right: 10px;
 }
 
+@media (max-width: 550px) {
+    ul.menu li {
+        font-size: 27px;
+    }
+}
+
 .menu a {
     color: #FFF;
     text-decoration: none;
