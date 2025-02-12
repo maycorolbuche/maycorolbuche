@@ -3,6 +3,11 @@ document
   .addEventListener("click", function () {
     document.querySelector("header").classList.toggle("menu-active");
     document.querySelector("header").classList.add("active");
+    if (document.querySelector("header").classList.contains("menu-active")) {
+      document.querySelector("body").classList.add("menu-active");
+    } else {
+      document.querySelector("body").classList.remove("menu-active");
+    }
   });
 
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
