@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <title>Currículo</title>
+
+    <meta charset="UTF-8" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <style>
+        .print {
+            display: none;
+        }
+
+        .page {
+            min-height: 100vh;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+            }
+
+            .print {
+                display: block;
+            }
+
+            /* 2 páginas */
+            .page {
+                min-height: 200vh;
+            }
+        }
+
+        @font-face {
+            font-family: 'Qualion Text';
+            src: url('fonts/QualionText-Light.woff2') format('woff2'),
+                url('fonts/QualionText-Light.woff') format('woff');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
+
+
+        .bg-primary {
+            background-color: #2B3A50 !important;
+        }
+
+        .h1,
+        h1 {
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .h1 span,
+        h1 span {
+            border-bottom: solid;
+            border-bottom-width: 1.5px;
+        }
+
+        small,
+        .small {
+            font-size: 11px;
+        }
+
+        .text-bold {
+            font-weight: bold;
+        }
+
+        .text-italic {
+            font-style: italic;
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        .nowrap {
+            white-space: nowrap;
+        }
+
+
+        .title {
+            font-family: 'Qualion Text';
+            font-weight: 300;
+            font-style: normal;
+            font-size: 58px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .box {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="d-flex flex-row flex-nowrap page">
+        <div class="bg-primary text-white p-4 pt-5" style="width: 5.5cm;">
+            <div class="box">
+                <h1><span>Dados Pessoais</span></h1>
+                <div class="small">Dt. Nasc.: 11/08/1988</div>
+                <div class="small">Idade: <span id="idade"></span> anos</div>
+            </div>
+            <div class="box">
+                <h1><span>Contato</span></h1>
+                <div class="d-flex align-items-center pt-2">
+                    <i class="fas fa-phone pe-2"></i>
+                    <small>(11) 97998-8615</small>
+                </div>
+                <div class="d-flex align-items-center pt-2">
+                    <i class="fas fa-envelope pe-2"></i>
+                    <small>mayco_rolbuche@hotmail.com</small>
+                </div>
+                <div class="d-flex align-items-center pt-2">
+                    <i class="fas fa-link pe-2"></i>
+                    <small>
+                        <a class="text-white" href="https://maycorolbuche.com.br" target="_blank">
+                            maycorolbuche.com.br
+                        </a>
+                    </small>
+                </div>
+                <div class="d-flex align-items-center pt-2">
+                    <i class="fas fa-link pe-2"></i>
+                    <small>
+                        <a class="text-white" href="https://mxsoft.com.br" target="_blank">
+                            mxsoft.com.br
+                        </a>
+                    </small>
+                </div>
+                <div class="d-flex align-items-center pt-2">
+                    <i class="fas fa-map-marker-alt pe-2"></i>
+                    <small>São Paulo-SP</small>
+                </div>
+            </div>
+            <div class="box">
+                <h1><span>Conhecimentos</span></h1>
+                <small>
+                    ASP, Bootstrap, CodeIgniter, Composer, CSS, CSS3, Delphi, HTML, HTML5, Javascript, Jekyll, JQuery,
+                    Laravel, MySQL, NodeJS, Oracle, PHP, SQL Server, SQLite, VB, VueJS, Wordpress, Yarn, Yii
+                </small>
+            </div>
+        </div>
+
+
+        <div class="ps-3 pe-3 pt-4 w-100">
+            <div class="title text-center">Mayco Rolbuche</div>
+            <div class="d-flex align-items-center justify-content-center" style="margin-top: -20px;">
+                <div class="subtitle">Desenvolvedor</div>
+                <div class="bg-primary ms-2" style="width: 402px;height: 11px;"></div>
+            </div>
+            <div class="pt-3"></div>
+            <div class="box">
+                <h1><span>Sobre mim</span></h1>
+                <div>
+                    Mais de 10 anos de experiência em programação, com participação em diversos projetos e segmentos,
+                    tais como sites e sistemas de home-care, sistemas de odontologia, sistemas imobiliários, softwares
+                    financeiros, entre outros.
+                </div>
+            </div>
+            <div class="box">
+                <h1><span>Educação</span></h1>
+                <div class="d-flex pt-2 pb-2">
+                    <div class="text-bold nowrap">2024 - 2024</div>
+                    <div class="ps-2">
+                        <div class="text-bold uppercase">Pós Graduação em Docência em Sistemas de Informação</div>
+                        <div>Universidade Anhanguera</div>
+                    </div>
+                </div>
+                <div class="d-flex pt-2 pb-2">
+                    <div class="text-bold nowrap">2007 - 2009</div>
+                    <div class="ps-2">
+                        <div class="text-bold uppercase">Superior em Análise e Desenvolvimento de Sistemas</div>
+                        <div>UNIESP</div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <h1><span>Experiência</span></h1>
+                <div class="d-flex pt-2 pb-2">
+                    <div class="text-bold nowrap">2007 - 2025</div>
+                    <div class="ps-2">
+                        <div class="text-bold uppercase">Desenvolvedor Desktop / Analista de Sistemas</div>
+                        <div class="text-italic uppercase">View Financial System</div>
+                        <div>
+                            Desenvolvimento e manutenção de sistemas financeiros em
+                            Delphi 7 / Delphi 2010, com bancos de dados SQL Server e Oracle.
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex pt-2 pb-2">
+                    <div class="text-bold nowrap">2021 - 2023</div>
+                    <div class="ps-2">
+                        <div class="text-bold uppercase">Desenvolvedor Web</div>
+                        <div class="text-italic uppercase">Point Master Comércio de Eletrônicos</div>
+                        <div>
+                            Manutenção de diversos sistema, tais como PDV, loja virtual, aplicativo de tradução
+                            simultânea, clínica odontológica, entre outros.
+                            Principais ferramentas utilizadas: PHP, Laravel, Codeigniter e MySQL.
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex pt-2 pb-2">
+                    <div class="text-bold nowrap">2020 - 2021</div>
+                    <div class="ps-2">
+                        <div class="text-bold uppercase">Webmaster</div>
+                        <div class="text-italic uppercase">Sara Nossa Terra</div>
+                        <div>
+                            Manutenção dos principais canais de comuniação (sites SaraPlay, Sara Nossa Terra e sites
+                            parceiros).
+                            Ferramentas: PHP, MySQL e Wordpress
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <h1><span>Principais Projetos</span></h1>
+                <div class="d-flex pt-2 pb-2">
+                    <div class="text-bold nowrap">2021</div>
+                    <div class="ps-2">
+                        <div class="text-bold uppercase">Sistema Odontológico</div>
+                        <div>
+                            Sistema odontológico totalmente parametrizável, desenvolvido em PHP + MySQL, com controle
+                            financeiro, fluxo de caixa, e envio de mensagens WhatsApp através de API.
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex pt-2 pb-2">
+                    <div class="text-bold nowrap">2019</div>
+                    <div class="ps-2">
+                        <div class="text-bold uppercase">Sistema Imobiliário</div>
+                        <div>
+                            Site e sistema imobiliário totalmente parametrizável, desenvolvido em PHP + MySQL, com
+                            integração aos principais sites imobiliários (Imóvel Web e ZAP Imóveis), geração de boletos
+                            e arquivos CNAB, controle financeiro, fluxo de caixa, entre outros.
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex pt-2 pb-2">
+                    <div class="text-bold nowrap">2015</div>
+                    <div class="ps-2">
+                        <div class="text-bold uppercase">MDA Wiki</div>
+                        <div>
+                            <a class="text-dark" href="https://mda.wiki.br" target="_blank">https://mda.wiki.br</a>
+                        </div>
+                        <div>
+                            Site colaborativo, no estilo de wikipedia, voltado para os clubes de Desbravadores e
+                            Aventureiros da Igreja Adventista do Sétimo Dia.
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex pt-2 pb-2">
+                    <div class="text-bold nowrap">2010</div>
+                    <div class="ps-2">
+                        <div class="text-bold uppercase">Sistema de HomeCare</div>
+                        <div>
+                            Site de home-care totalmente parametrizável, desenvolvido em PHP + MySQL, com
+                            controle financeiro, fluxo de caixa, gerenciamento de plantões, clientes, prestadores de
+                            serviço, painel do cliente, entre outros.
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex pt-2 pb-2">
+                    <div class="text-bold nowrap">2010</div>
+                    <div class="ps-2">
+                        <div class="text-bold uppercase">Louvor JA</div>
+                        <div>
+                            <a class="text-dark" href="https://louvorja.com.br"
+                                target="_blank">https://louvorja.com.br</a>
+                        </div>
+                        <div>
+                            <a class="text-dark" href="https://app.louvorja.com.br"
+                                target="_blank">https://app.louvorja.com.br</a>
+                        </div>
+                        <div>
+                            Software de músicas e organização de cultos para igrejas. Versão Desktop feita em Delphi, e
+                            versão web feita em VueJS.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <h1><span>Cursos</span></h1>
+                <div class="d-flex">
+                    <div>
+                        2024
+                        | <span class="text-bold">Inteligência Artificial: Aspectos Técnicos e Governança</span>
+                        | <span class="text-italic">ABES - Associação Brasileira das Empresas de Software</span>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div>
+                        2024
+                        | <span class="text-bold">Fundamentos da Lei Geral de Proteção de Dados (LGPD)</span>
+                        | <span class="text-italic">ABES - Associação Brasileira das Empresas de Software</span>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div>
+                        2023
+                        | <span class="text-bold">Criação de Plugins Wordpress</span>
+                        | <span class="text-italic">Udemy</span>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div>
+                        2022
+                        | <span class="text-bold">WordPress para Desenvolvedores</span>
+                        | <span class="text-italic">Udemy</span>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div>
+                        2022
+                        | <span class="text-bold">Curso MYSQL Developer Expert - Básico ao Avançado</span>
+                        | <span class="text-italic">Udemy</span>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div>
+                        2022
+                        | <span class="text-bold">Lumen Micro Framework</span>
+                        | <span class="text-italic">Udemy</span>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div>
+                        2022
+                        | <span class="text-bold">Formação Node.js</span>
+                        | <span class="text-italic">Udemy</span>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div>
+                        2022
+                        | <span class="text-bold">Vue JS (Vue CLI, Vue Router, Vuex e GraphQL)</span>
+                        | <span class="text-italic">Udemy</span>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div>
+                        2022
+                        | <span class="text-bold">Git - O Curso completo: Git, Github e git-flow</span>
+                        | <span class="text-italic">Udemy</span>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div>
+                        2021
+                        | <span class="text-bold">Docker (com Docker Swarm e Kubernetes)</span>
+                        | <span class="text-italic">Udemy</span>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div>
+                        2021
+                        | <span class="text-bold">Desenvolvimento Avançado com PHP, Laravel e Vue.JS</span>
+                        | <span class="text-italic">Udemy</span>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div>
+                        2021
+                        | <span class="text-bold">CodeIgniter: Criando Websites Profissionais com PHP</span>
+                        | <span class="text-italic">Udemy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function idade(nascimento, hoje) {
+            var diferencaAnos = hoje.getFullYear() - nascimento.getFullYear();
+            if (new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate()) < new Date(hoje.getFullYear(),
+                nascimento.getMonth(), nascimento.getDate())) diferencaAnos--; return diferencaAnos;
+        }
+
+        document.getElementById("idade").innerHTML = idade(new Date(1988, 8, 22), new Date()); </script>
+</body>
+
+</html>
