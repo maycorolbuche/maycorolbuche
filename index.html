@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Portfólio :: Mayco Rolbuche</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +13,27 @@
 
     <link rel="stylesheet" href="assets/styles.min.css">
     <script src="assets/scripts.min.js" defer></script>
+    <script src="assets/typewriter-effect.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var subtitle = document.getElementById('subtitle');
+
+            var typewriter = new Typewriter(subtitle, {
+                loop: true
+            });
+
+            typewriter.typeString('Desenvolvedor')
+                .pauseFor(2500)
+                .typeString(' <span class="text-primary">FullStack</span>')
+                .pauseFor(2500)
+                .deleteAll()
+                .typeString('DevOps')
+                .pauseFor(2500)
+                .start();
+
+        });
+    </script>
 </head>
 
 <body>
@@ -33,7 +54,7 @@
     <section id="home" class="page center">
         <div class="x-center">
             <h1>Mayco<span class="text-primary">Rolbuche</span></h1>
-            <span class="subtitle">&lt; Desenvolvedor /&gt;</span>
+            <span class="subtitle">&lt; <span id="subtitle"></span>/&gt;</span>
             <div class="social-media">
                 <a href="https://www.linkedin.com/in/mayco-rolbuche/" target="_blank">
                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
