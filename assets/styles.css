@@ -141,6 +141,10 @@ ul.menu {
     body.menu-active {
         overflow: hidden;
     }
+
+    body.menu-active section {
+        visibility: hidden;
+    }
 }
 
 header.menu-active ul.menu {
