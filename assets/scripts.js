@@ -54,3 +54,12 @@ function observeSections() {
 
 // Chama a função para começar a observar as seções
 observeSections();
+
+window.addEventListener("scroll", function () {
+  const scrollDownElement = document.getElementById("scroll-down-home");
+  if (window.scrollY === 0) {
+    scrollDownElement.classList.remove("hidden"); // Mostra o elemento
+  } else {
+    scrollDownElement.classList.add("hidden"); // Esconde o elemento
+  }
+});
