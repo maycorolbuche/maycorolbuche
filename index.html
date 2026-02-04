@@ -4,6 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self';">
+    <meta name="description"
+        content="Portfólio de Mayco Rolbuche - Desenvolvedor FullStack com mais de 10 anos de experiência em PHP, JavaScript, Vue.js, Laravel e WordPress">
+    <meta name="keywords" content="desenvolvedor fullstack, PHP, JavaScript, Vue.js, Laravel, WordPress, portfolio">
+    <meta name="author" content="Mayco Rolbuche">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Portfólio :: Mayco Rolbuche - Desenvolvedor FullStack">
+    <meta property="og:description" content="Desenvolvedor FullStack com mais de 10 anos de experiência">
+    <meta property="og:url" content="https://maycorolbuche.com.br">
+    <meta property="og:type" content="website">
+
     <title>Portfólio :: Mayco Rolbuche</title>
 
     <link rel="icon" href="assets/favicon.png">
@@ -11,7 +24,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-        rel="stylesheet">
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+            rel="stylesheet">
+    </noscript>
 
     <link rel="stylesheet" href="assets/styles.min.css?v=3">
     <script src="assets/scripts.min.js?v=3" defer></script>
@@ -20,20 +37,21 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var subtitle = document.getElementById('subtitle');
+            var texts = JSON.parse(subtitle.getAttribute('data-texts'));
 
             var typewriter = new Typewriter(subtitle, {
                 loop: true
             });
 
-            typewriter.typeString('Desenvolvedor')
-                .pauseFor(2500)
-                .typeString(' <span class="text-primary">FullStack</span>')
-                .pauseFor(2500)
-                .deleteAll()
-                .typeString('DevOps')
-                .pauseFor(2500)
-                .start();
+            texts.forEach(function (text, index) {
+                typewriter.typeString(text)
+                    .pauseFor(2500);
+                if (index < texts.length - 1) {
+                    typewriter.deleteAll();
+                }
+            });
 
+            typewriter.start();
         });
     </script>
 </head>
@@ -56,7 +74,10 @@
     <section id="home" class="page center">
         <div class="x-center">
             <h1>Mayco<span class="text-primary">Rolbuche</span></h1>
-            <span class="subtitle">&lt; <span id="subtitle"></span>/&gt;</span>
+            <span class="subtitle">&lt;
+                <span id="subtitle"
+                    data-texts='["Desenvolvedor", "Desenvolvedor <span class=\"text-primary\">FullStack</span>", "DevOps"]'></span>
+                /&gt;</span>
             <div class="social-media">
                 <a title="Linkedin" href="https://www.linkedin.com/in/mayco-rolbuche/" target="_blank">
                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="https://www.w3.org/2000/svg">
