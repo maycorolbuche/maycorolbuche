@@ -1,7 +1,48 @@
-RewriteCond %{HTTPS} off
-RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
-RewriteRule ^\.git - [F,L]
+# Configurações de Segurança Recomendadas para .htaccess
 
-ErrorDocument 403 /403.shtml
-ErrorDocument 404 /404.shtml
-ErrorDocument 500 /500.shtml
+<IfModule mod_headers.c>
+    # 1. Strict-Transport-Security (HSTS)
+    # Força o uso de HTTPS para todas as conexões futuras.
+    # max-age=31536000 (1 ano), includeSubDomains se todos os subdomínios usarem HTTPS.
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+
+    # 2. X-Content-Type-Options
+    # Previne ataques de "MIME-sniffing".
+    Header always set X-Content-Type-Options "nosniff"
+
+    # 3. X-Frame-Options
+    # Protege contra Clickjacking. Use DENY para impedir qualquer incorporação ou SAMEORIGIN para permitir apenas pelo próprio domínio.
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # 4. X-XSS-Protection
+    # Ativa o filtro de XSS em navegadores mais antigos.
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # 5. Referrer-Policy
+    # Controla a informação de referência enviada. no-referrer-when-downgrade é um bom equilíbrio.
+    Header always set Referrer-Policy "no-referrer-when-downgrade"
+
+    # 6. Permissions-Policy (anteriormente Feature-Policy)
+    # Permite ou bloqueia o uso de recursos do navegador. Ajuste conforme necessário.
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+    # 7. Content-Security-Policy (CSP)
+    # Previne XSS e injeção de dados. ESTE É UM EXEMPLO BÁSICO E DEVE SER ADAPTADO E TESTADO RIGOROSAMENTE.
+    # Comece com Content-Security-Policy-Report-Only para testar sem bloquear.
+    # Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self';"
+</IfModule>
+
+# Bloquear acesso a arquivos e diretórios sensíveis
+
+# Garante que arquivos como .env e diretórios .git não sejam acessíveis publicamente
+
+<FilesMatch "^(\.env|\.git|\.htpasswd|\.user.ini|wp-config\.php|config\.php|info\.php|phpinfo\.php|server-status|\.ssh)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Desabilitar listagem de diretórios
+
+# Impede que os usuários naveguem pelos conteúdos dos diretórios se não houver um arquivo index
+
+Options -Indexes
