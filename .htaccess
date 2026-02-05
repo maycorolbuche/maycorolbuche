@@ -1,22 +1,11 @@
-# ==========================
-
 # FORÇAR HTTPS
 
-# ==========================
-
 RewriteEngine On
-
-# Compatível com Cloudflare + Apache
-
 RewriteCond %{HTTPS} !=on
 RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-# ==========================
-
-# BLOQUEIOS BÁSICOS
-
-# ==========================
+## BLOQUEIOS BÁSICOS
 
 # Bloquear .git
 
@@ -28,19 +17,11 @@ RewriteRule ^\.git - [F,L]
     Require all denied
 </FilesMatch>
 
-# ==========================
-
 # DESABILITAR LISTAGEM
-
-# ==========================
 
 Options -Indexes
 
-# ==========================
-
 # CABEÇALHOS SIMPLES
-
-# ==========================
 
 <IfModule mod_headers.c>
     # Previne o navegador de adivinhar o tipo de conteúdo (MIME-sniffing)
@@ -63,21 +44,13 @@ Options -Indexes
     Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com;"
 </IfModule>
 
-# ==========================
-
-# PROTEÇÃO SVG (IMPORTANTE)
-
-# ==========================
+# PROTEÇÃO SVG
 
 <FilesMatch "\.svg$">
     Header set X-Content-Type-Options "nosniff"
 </FilesMatch>
 
-# ==========================
-
 # PÁGINAS DE ERRO
-
-# ==========================
 
 ErrorDocument 403 /403.shtml
 ErrorDocument 404 /404.shtml
