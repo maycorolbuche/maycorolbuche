@@ -1,6 +1,68 @@
-RewriteCond %{HTTPS} off
-RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+# ==========================
+
+# FORÇAR HTTPS
+
+# ==========================
+
+RewriteEngine On
+
+# Compatível com Cloudflare + Apache
+
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# ==========================
+
+# BLOQUEIOS BÁSICOS
+
+# ==========================
+
+# Bloquear .git
+
 RewriteRule ^\.git - [F,L]
+
+# Bloquear arquivos sensíveis
+
+<FilesMatch "^(\.env|\.htpasswd|\.user\.ini|wp-config\.php|config\.php|info\.php|phpinfo\.php)">
+    Require all denied
+</FilesMatch>
+
+# ==========================
+
+# DESABILITAR LISTAGEM
+
+# ==========================
+
+Options -Indexes
+
+# ==========================
+
+# CABEÇALHOS SIMPLES
+
+# ==========================
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "no-referrer-when-downgrade"
+</IfModule>
+
+# ==========================
+
+# PROTEÇÃO SVG (IMPORTANTE)
+
+# ==========================
+
+<FilesMatch "\.svg$">
+    Header set X-Content-Type-Options "nosniff"
+</FilesMatch>
+
+# ==========================
+
+# PÁGINAS DE ERRO
+
+# ==========================
 
 ErrorDocument 403 /403.shtml
 ErrorDocument 404 /404.shtml
