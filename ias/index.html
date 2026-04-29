@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ferramentas IA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050a14;
+      --surface: #0d1624;
+      --card: #111d2e;
+      --card-hover: #162438;
+      --border: rgba(99,179,255,0.10);
+      --border-hover: rgba(99,179,255,0.30);
+      --accent: #3b82f6;
+      --accent2: #06b6d4;
+      --text: #e8f1ff;
+      --muted: #7a9bbf;
+      --glow: rgba(59,130,246,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Background grid ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Orbs ── */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    .orb1 { width: 420px; height: 420px; background: rgba(59,130,246,0.12); top: -100px; left: -80px; }
+    .orb2 { width: 320px; height: 320px; background: rgba(6,182,212,0.10); bottom: 80px; right: -60px; animation-delay: -9s; }
+    @keyframes drift { from { transform: translate(0,0); } to { transform: translate(30px,40px); } }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 64px 24px 40px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(59,130,246,0.12);
+      border: 1px solid rgba(59,130,246,0.25);
+      color: var(--accent2);
+      font-family: 'Raleway', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .badge span { width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
+
+    header h1 {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(2.2rem, 7vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #e8f1ff 0%, #93c5fd 50%, #67e8f9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+
+    header p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── CATEGORY FILTER ── */
+    .filter-bar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 24px 48px;
+    }
+
+    .filter-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 18px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--accent);
+      background: rgba(59,130,246,0.12);
+      color: var(--text);
+    }
+
+    /* ── GRID ── */
+    main {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 20px;
+    }
+
+    /* ── APP CARD ── */
+    .app-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px 16px 20px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1), background .2s, border-color .2s, box-shadow .2s;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp .5s ease both;
+    }
+
+    .app-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(59,130,246,0.12), transparent 70%);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .app-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      background: var(--card-hover);
+      border-color: var(--border-hover);
+      box-shadow: 0 12px 40px rgba(59,130,246,0.15), 0 0 0 1px rgba(59,130,246,0.15);
+    }
+    .app-card:hover::before { opacity: 1; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* stagger */
+    .app-card:nth-child(1)  { animation-delay: .05s }
+    .app-card:nth-child(2)  { animation-delay: .10s }
+    .app-card:nth-child(3)  { animation-delay: .15s }
+    .app-card:nth-child(4)  { animation-delay: .20s }
+    .app-card:nth-child(5)  { animation-delay: .25s }
+    .app-card:nth-child(6)  { animation-delay: .30s }
+    .app-card:nth-child(7)  { animation-delay: .35s }
+    .app-card:nth-child(8)  { animation-delay: .40s }
+    .app-card:nth-child(9)  { animation-delay: .45s }
+    .app-card:nth-child(10) { animation-delay: .50s }
+    .app-card:nth-child(11) { animation-delay: .55s }
+    .app-card:nth-child(12) { animation-delay: .60s }
+    .app-card:nth-child(13) { animation-delay: .65s }
+    .app-card:nth-child(14) { animation-delay: .70s }
+
+    /* icon wrapper */
+    .icon-wrap {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #1a2840;
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    .icon-wrap img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+    }
+
+    /* fallback letter icon */
+    .icon-wrap.fallback {
+      font-family: 'Raleway', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .category-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      background: rgba(6,182,212,0.10);
+      border: 1px solid rgba(6,182,212,0.2);
+      padding: 3px 10px;
+      border-radius: 100px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .app-name {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.2;
+      position: relative;
+      z-index: 1;
+    }
+
+    .app-desc {
+      font-size: 11.5px;
+      color: var(--muted);
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+    }
+
+    .arrow {
+      margin-top: 4px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 12px;
+      position: relative;
+      z-index: 1;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .app-card:hover .arrow {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(59,130,246,0.12);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 32px 24px 48px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      main { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+
+  <header>
+    <h1>Ferramentas<br>de IA</h1>
+    <p>As melhores IAs que substituem as ferramentas tradicionais. Clique para acessar.</p>
+  </header>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterCards('all', this)">Todas</button>
+    <button class="filter-btn" onclick="filterCards('pesquisa', this)">Pesquisa</button>
+    <button class="filter-btn" onclick="filterCards('escrita', this)">Escrita</button>
+    <button class="filter-btn" onclick="filterCards('produtividade', this)">Produtividade</button>
+    <button class="filter-btn" onclick="filterCards('criativo', this)">Criativo</button>
+    <button class="filter-btn" onclick="filterCards('video', this)">Vídeo</button>
+    <button class="filter-btn" onclick="filterCards('comunicacao', this)">Comunicação</button>
+  </div>
+
+  <main id="grid">
+
+    <a class="app-card" href="https://www.perplexity.ai" target="_blank" data-cat="pesquisa">
+      <div class="icon-wrap">
+        <img src="https://www.perplexity.ai/favicon.ico" alt="Perplexity" onerror="this.parentElement.classList.add('fallback');this.parentElement.innerHTML='P'" />
+      </div>
+      <span class="category-tag">Pesquisa</span>
+      <div class="app-name">Perplexity</div>
+      <div class="app-desc">IA que pesquisa e entrega respostas completas</div>
+      <div class="arrow">↗</div>
+    </a>
+
+    <a class="app-card" href="https://www.claude.ai" target="_blank" data-cat="escrita">
+      <div class="icon-wrap">
+        <img src="https://claude.ai/favicon.ico" alt="Claude" onerror="this.parentElement.classList.add('fallback');this.parentElement.innerHTML='C'" />
+      </div>
+      <span class="category-tag">Escrita</span>
+      <div class="app-name">Claude</div>
+      <div class="app-desc">IA que entende, escreve e refina como ninguém</div>
+      <div class="arrow">↗</div>
+    </a>
+
+    <a class="app-card" href="https://www.microsoft.com/pt-br/microsoft-365/excel" target="_blank" data-cat="produtividade">
+      <div class="icon-wrap">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg" alt="Claude in Excel" onerror="this.parentElement.classList.add('fallback');this.parentElement.innerHTML='X'" />
+      </div>
+      <span class="category-tag">Produtividade</span>
+      <div class="app-name">Claude in Excel</div>
+      <div class="app-desc">IA integrada ao Excel que analisa e gera insights</div>
+      <div class="arrow">↗</div>
+    </a>
+
+    <a class="app-card" href="https://gamma.app" target="_blank" data-cat="produtividade">
+      <div class="icon-wrap">
+        <img src="https://gamma.app/favicon.ico" alt="Gamma" onerror="this.parentElement.classList.add('fallback');this.parentElement.innerHTML='G'" />
+      </div>
+      <span class="category-tag">Produtividade</span>
+      <div class="app-name">Gamma</div>
+      <div class="app-desc">Apresentações geradas pela IA em segundos</div>
+      <div class="arrow">↗</div>
+    </a>
+
+    <a class="app-card" href="https://nanobanana.ai" target="_blank" data-cat="criativo">
+      <div class="icon-wrap" style="background: linear-gradient(135deg,#1a1a2e,#16213e);">
+        <img src="https://nanobanana.ai/favicon.ico" alt="Nano Banana" onerror="this.parentElement.classList.add('fallback');this.parentElement.style.background='linear-gradient(135deg,#f59e0b,#d97706)';this.parentElement.innerHTML='🍌'" />
+      </div>
+      <span class="category-tag">Criativo</span>
+      <div class="app-name">Nano Banana</div>
+      <div class="app-desc">Edição e criação de imagens com IA avançada</div>
+      <div class="arrow">↗</div>
+    </a>
+
+    <a class="app-card" href="https://kling.kuaishou.com" target="_blank" data-cat="video">
+      <div class="icon-wrap">
+        <img src="https://kling.kuaishou.com/favicon.ico" alt="Kling" onerror="this.parentElement.classList.add('fallback');this.parentElement.style.background='linear-gradient(135deg,#7c3aed,#4f46e5)';this.parentElement.innerHTML='K'" />
+      </div>
+      <span class="category-tag">Vídeo</span>
+      <div class="app-name">Kling</div>
+      <div class="app-desc">Vídeos gerados e editados por IA com realismo</div>
+      <div class="arrow">↗</div>
+    </a>
+
+    <a class="app-card" href="https://chatgpt.com" target="_blank" data-cat="criativo">
+      <div class="icon-wrap">
+        <img src="https://chat.openai.com/favicon.ico" alt="GPT Images 2" onerror="this.parentElement.classList.add('fallback');this.parentElement.innerHTML='G'" />
+      </div>
+      <span class="category-tag">Criativo</span>
+      <div class="app-name">GPT Images 2</div>
+      <div class="app-desc">Criação de artes e designs com IA ultra-realista</div>
+      <div class="arrow">↗</div>
+    </a>
+
+    <a class="app-card" href="https://claude.ai" target="_blank" data-cat="produtividade">
+      <div class="icon-wrap">
+        <img src="https://claude.ai/favicon.ico" alt="Claude Design" onerror="this.parentElement.classList.add('fallback');this.parentElement.innerHTML='C'" />
+      </div>
+      <span class="category-tag">Sites</span>
+      <div class="app-name">Claude Design</div>
+      <div class="app-desc">Sites e páginas criados com IA prontos para publicar</div>
+      <div class="arrow">↗</div>
+    </a>
+
+    <a class="app-card" href="https://www.perplexity.ai/comet" target="_blank" data-cat="pesquisa">
+      <div class="icon-wrap">
+        <img src="https://www.perplexity.ai/favicon.ico" alt="Perplexity Comet" onerror="this.parentElement.classList.add('fallback');this.parentElement.innerHTML='P'" />
+      </div>
+      <span class="category-tag">Navegador</span>
+      <div class="app-name">Perplexity Comet</div>
+      <div class="app-desc">Navegação com IA que encontra, resume e age por você</div>
+      <div class="arrow">↗</div>
+    </a>
+
+    <a class="app-card" href="https://granola.ai" target="_blank" data-cat="produtividade">
+      <div class="icon-wrap">
+        <img src="https://granola.ai/favicon.ico" alt="Granola" onerror="this.parentElement.classList.add('fallback');this.parentElement.style.background='linear-gradient(135deg,#16a34a,#15803d)';this.parentElement.innerHTML='G'" />
+      </div>
+      <span class="category-tag">Anotações</span>
+      <div class="app-name">Granola</div>
+      <div class="app-desc">IA que organiza suas ideias e conecta tudo para você</div>
+      <div class="arrow">↗</div>
+    </a>
+
+    <a class="app-card" href="https://workspace.google.com" target="_blank" data-cat="escrita">
+      <div class="icon-wrap">
+        <img src="https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png" alt="Google Workspace Studio" onerror="this.parentElement.classList.add('fallback');this.parentElement.innerHTML='G'" />
+      </div>
+      <span class="category-tag">E-mail</span>
+      <div class="app-name">Workspace Studio</div>
+      <div class="app-desc">IA que redige, responde e organiza seus e-mails</div>
+      <div class="arrow">↗</div>
+    </a>
+
+    <a class="app-card" href="https://botninja.com.br" target="_blank" data-cat="comunicacao">
+      <div class="icon-wrap" style="background: linear-gradient(135deg,#064e3b,#065f46);">
+        <img src="https://botninja.com.br/favicon.ico" alt="BotNinja" onerror="this.parentElement.classList.add('fallback');this.parentElement.style.background='linear-gradient(135deg,#25d366,#128c7e)';this.parentElement.innerHTML='🥷'" />
+      </div>
+      <span class="category-tag">Comunicação</span>
+      <div class="app-name">BotNinja</div>
+      <div class="app-desc">Automatização humanizada do WhatsApp com IA</div>
+      <div class="arrow">↗</div>
+    </a>
+
+    <a class="app-card" href="https://www.perplexity.ai" target="_blank" data-cat="pesquisa">
+      <div class="icon-wrap">
+        <img src="https://www.perplexity.ai/favicon.ico" alt="Perplexity" onerror="this.parentElement.classList.add('fallback');this.parentElement.innerHTML='P'" />
+      </div>
+      <span class="category-tag">Pesquisa Avançada</span>
+      <div class="app-name">Perplexity Pro</div>
+      <div class="app-desc">Pesquisa profunda com IA e fontes confiáveis</div>
+      <div class="arrow">↗</div>
+    </a>
+
+    <a class="app-card" href="https://nanobanana.ai" target="_blank" data-cat="criativo">
+      <div class="icon-wrap" style="background: linear-gradient(135deg,#1a1a2e,#16213e);">
+        <img src="https://nanobanana.ai/favicon.ico" alt="Nano Banana 2" onerror="this.parentElement.classList.add('fallback');this.parentElement.style.background='linear-gradient(135deg,#f59e0b,#b45309)';this.parentElement.innerHTML='🍌'" />
+      </div>
+      <span class="category-tag">Geração de Imagem</span>
+      <div class="app-name">Nano Banana 2</div>
+      <div class="app-desc">Nova geração de imagens com IA ainda mais poderosa</div>
+      <div class="arrow">↗</div>
+    </a>
+
+  </main>
+
+  <footer>
+    <p>Clique em qualquer card para acessar a ferramenta</p>
+  </footer>
+
+  <script>
+    function filterCards(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.querySelectorAll('.app-card').forEach(card => {
+        if (cat === 'all' || card.dataset.cat === cat) {
+          card.style.display = '';
+          card.style.animation = 'none';
+          requestAnimationFrame(() => {
+            card.style.animation = '';
+          });
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
