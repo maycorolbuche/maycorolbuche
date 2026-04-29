@@ -1,28 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ferramentas IA</title>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <base href="/ias/">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
       --bg: #050a14;
       --surface: #0d1624;
       --card: #111d2e;
       --card-hover: #162438;
-      --border: rgba(99,179,255,0.10);
-      --border-hover: rgba(99,179,255,0.30);
+      --border: rgba(99, 179, 255, 0.10);
+      --border-hover: rgba(99, 179, 255, 0.30);
       --accent: #3b82f6;
       --accent2: #06b6d4;
       --text: #e8f1ff;
       --muted: #7a9bbf;
-      --glow: rgba(59,130,246,0.15);
+      --glow: rgba(59, 130, 246, 0.15);
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       font-family: 'DM Sans', sans-serif;
@@ -38,8 +49,8 @@
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+        linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
       background-size: 48px 48px;
       pointer-events: none;
       z-index: 0;
@@ -54,9 +65,33 @@
       z-index: 0;
       animation: drift 18s ease-in-out infinite alternate;
     }
-    .orb1 { width: 420px; height: 420px; background: rgba(59,130,246,0.12); top: -100px; left: -80px; }
-    .orb2 { width: 320px; height: 320px; background: rgba(6,182,212,0.10); bottom: 80px; right: -60px; animation-delay: -9s; }
-    @keyframes drift { from { transform: translate(0,0); } to { transform: translate(30px,40px); } }
+
+    .orb1 {
+      width: 420px;
+      height: 420px;
+      background: rgba(59, 130, 246, 0.12);
+      top: -100px;
+      left: -80px;
+    }
+
+    .orb2 {
+      width: 320px;
+      height: 320px;
+      background: rgba(6, 182, 212, 0.10);
+      bottom: 80px;
+      right: -60px;
+      animation-delay: -9s;
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate(0, 0);
+      }
+
+      to {
+        transform: translate(30px, 40px);
+      }
+    }
 
     /* ── HEADER ── */
     header {
@@ -70,8 +105,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(59,130,246,0.12);
-      border: 1px solid rgba(59,130,246,0.25);
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.25);
       color: var(--accent2);
       font-family: 'Raleway', sans-serif;
       font-size: 11px;
@@ -82,8 +117,28 @@
       border-radius: 100px;
       margin-bottom: 24px;
     }
-    .badge span { width: 6px; height: 6px; background: var(--accent2); border-radius: 50%; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.8)} }
+
+    .badge span {
+      width: 6px;
+      height: 6px;
+      background: var(--accent2);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1)
+      }
+
+      50% {
+        opacity: .4;
+        transform: scale(.8)
+      }
+    }
 
     header h1 {
       font-family: 'Raleway', sans-serif;
@@ -129,9 +184,11 @@
       cursor: pointer;
       transition: all .2s;
     }
-    .filter-btn:hover, .filter-btn.active {
+
+    .filter-btn:hover,
+    .filter-btn.active {
       border-color: var(--accent);
-      background: rgba(59,130,246,0.12);
+      background: rgba(59, 130, 246, 0.12);
       color: var(--text);
     }
 
@@ -161,7 +218,7 @@
       align-items: center;
       gap: 12px;
       cursor: pointer;
-      transition: transform .25s cubic-bezier(.34,1.56,.64,1), background .2s, border-color .2s, box-shadow .2s;
+      transition: transform .25s cubic-bezier(.34, 1.56, .64, 1), background .2s, border-color .2s, box-shadow .2s;
       position: relative;
       overflow: hidden;
       animation: fadeUp .5s ease both;
@@ -171,7 +228,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 0%, rgba(59,130,246,0.12), transparent 70%);
+      background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.12), transparent 70%);
       opacity: 0;
       transition: opacity .3s;
     }
@@ -180,30 +237,81 @@
       transform: translateY(-6px) scale(1.03);
       background: var(--card-hover);
       border-color: var(--border-hover);
-      box-shadow: 0 12px 40px rgba(59,130,246,0.15), 0 0 0 1px rgba(59,130,246,0.15);
+      box-shadow: 0 12px 40px rgba(59, 130, 246, 0.15), 0 0 0 1px rgba(59, 130, 246, 0.15);
     }
-    .app-card:hover::before { opacity: 1; }
+
+    .app-card:hover::before {
+      opacity: 1;
+    }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* stagger */
-    .app-card:nth-child(1)  { animation-delay: .05s }
-    .app-card:nth-child(2)  { animation-delay: .10s }
-    .app-card:nth-child(3)  { animation-delay: .15s }
-    .app-card:nth-child(4)  { animation-delay: .20s }
-    .app-card:nth-child(5)  { animation-delay: .25s }
-    .app-card:nth-child(6)  { animation-delay: .30s }
-    .app-card:nth-child(7)  { animation-delay: .35s }
-    .app-card:nth-child(8)  { animation-delay: .40s }
-    .app-card:nth-child(9)  { animation-delay: .45s }
-    .app-card:nth-child(10) { animation-delay: .50s }
-    .app-card:nth-child(11) { animation-delay: .55s }
-    .app-card:nth-child(12) { animation-delay: .60s }
-    .app-card:nth-child(13) { animation-delay: .65s }
-    .app-card:nth-child(14) { animation-delay: .70s }
+    .app-card:nth-child(1) {
+      animation-delay: .05s
+    }
+
+    .app-card:nth-child(2) {
+      animation-delay: .10s
+    }
+
+    .app-card:nth-child(3) {
+      animation-delay: .15s
+    }
+
+    .app-card:nth-child(4) {
+      animation-delay: .20s
+    }
+
+    .app-card:nth-child(5) {
+      animation-delay: .25s
+    }
+
+    .app-card:nth-child(6) {
+      animation-delay: .30s
+    }
+
+    .app-card:nth-child(7) {
+      animation-delay: .35s
+    }
+
+    .app-card:nth-child(8) {
+      animation-delay: .40s
+    }
+
+    .app-card:nth-child(9) {
+      animation-delay: .45s
+    }
+
+    .app-card:nth-child(10) {
+      animation-delay: .50s
+    }
+
+    .app-card:nth-child(11) {
+      animation-delay: .55s
+    }
+
+    .app-card:nth-child(12) {
+      animation-delay: .60s
+    }
+
+    .app-card:nth-child(13) {
+      animation-delay: .65s
+    }
+
+    .app-card:nth-child(14) {
+      animation-delay: .70s
+    }
 
     /* icon wrapper */
     .icon-wrap {
@@ -240,8 +348,8 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--accent2);
-      background: rgba(6,182,212,0.10);
-      border: 1px solid rgba(6,182,212,0.2);
+      background: rgba(6, 182, 212, 0.10);
+      border: 1px solid rgba(6, 182, 212, 0.2);
       padding: 3px 10px;
       border-radius: 100px;
       position: relative;
@@ -280,10 +388,11 @@
       z-index: 1;
       transition: border-color .2s, color .2s, background .2s;
     }
+
     .app-card:hover .arrow {
       border-color: var(--accent);
       color: var(--accent);
-      background: rgba(59,130,246,0.12);
+      background: rgba(59, 130, 246, 0.12);
     }
 
     /* ── FOOTER ── */
@@ -299,10 +408,14 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 480px) {
-      main { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px; }
+      main {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 14px;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <div class="orb orb1"></div>
@@ -327,7 +440,7 @@
 
     <a class="app-card" href="https://www.perplexity.ai" target="_blank" data-cat="pesquisa">
       <div class="icon-wrap">
-        <img src="https://www.perplexity.ai/favicon.ico" alt="Perplexity" onerror="this.parentElement.classList.add('fallback');this.parentElement.innerHTML='P'" />
+        <img src="imgs/perplexity.ico" alt="Perplexity" />
       </div>
       <span class="category-tag">Pesquisa</span>
       <div class="app-name">Perplexity</div>
@@ -335,9 +448,9 @@
       <div class="arrow">↗</div>
     </a>
 
-    <a class="app-card" href="https://www.claude.ai" target="_blank" data-cat="escrita">
+    <a class="app-card" href="https://claude.ai" target="_blank" data-cat="escrita">
       <div class="icon-wrap">
-        <img src="https://claude.ai/favicon.ico" alt="Claude" onerror="this.parentElement.classList.add('fallback');this.parentElement.innerHTML='C'" />
+        <img src="imgs/claude.ico" alt="Claude" />
       </div>
       <span class="category-tag">Escrita</span>
       <div class="app-name">Claude</div>
@@ -347,7 +460,7 @@
 
     <a class="app-card" href="https://claude.com/claude-for-excel" target="_blank" data-cat="produtividade">
       <div class="icon-wrap">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg" alt="Claude in Excel" onerror="this.parentElement.classList.add('fallback');this.parentElement.innerHTML='X'" />
+        <img src="imgs/claude.ico" alt="Claude" />
       </div>
       <span class="category-tag">Produtividade</span>
       <div class="app-name">Claude in Excel</div>
@@ -357,7 +470,7 @@
 
     <a class="app-card" href="https://gamma.app" target="_blank" data-cat="produtividade">
       <div class="icon-wrap">
-        <img src="https://gamma.app/favicon.ico" alt="Gamma" onerror="this.parentElement.classList.add('fallback');this.parentElement.innerHTML='G'" />
+        <img src="imgs/gamma.ico" alt="Gamma" />
       </div>
       <span class="category-tag">Produtividade</span>
       <div class="app-name">Gamma</div>
@@ -365,9 +478,9 @@
       <div class="arrow">↗</div>
     </a>
 
-    <a class="app-card" href="https://nanobanana.ai" target="_blank" data-cat="criativo">
-      <div class="icon-wrap" style="background: linear-gradient(135deg,#1a1a2e,#16213e);">
-        <img src="https://nanobanana.ai/favicon.ico" alt="Nano Banana" onerror="this.parentElement.classList.add('fallback');this.parentElement.style.background='linear-gradient(135deg,#f59e0b,#d97706)';this.parentElement.innerHTML='🍌'" />
+    <a class="app-card" href="https://nanobanana.im/pt" target="_blank" data-cat="criativo">
+      <div class="icon-wrap">
+        <img src="imgs/nanobanana.ico" alt="Nano Banana" />
       </div>
       <span class="category-tag">Criativo</span>
       <div class="app-name">Nano Banana</div>
@@ -377,7 +490,7 @@
 
     <a class="app-card" href="https://kling.kuaishou.com" target="_blank" data-cat="video">
       <div class="icon-wrap">
-        <img src="https://kling.kuaishou.com/favicon.ico" alt="Kling" onerror="this.parentElement.classList.add('fallback');this.parentElement.style.background='linear-gradient(135deg,#7c3aed,#4f46e5)';this.parentElement.innerHTML='K'" />
+        <img src="imgs/klingai.ico" alt="Kling" />
       </div>
       <span class="category-tag">Vídeo</span>
       <div class="app-name">Kling</div>
@@ -385,9 +498,9 @@
       <div class="arrow">↗</div>
     </a>
 
-    <a class="app-card" href="https://chatgpt.com" target="_blank" data-cat="criativo">
+    <a class="app-card" href="https://chatgpt.com/images/" target="_blank" data-cat="criativo">
       <div class="icon-wrap">
-        <img src="https://chat.openai.com/favicon.ico" alt="GPT Images 2" onerror="this.parentElement.classList.add('fallback');this.parentElement.innerHTML='G'" />
+        <img src="imgs/chatgpt.ico" alt="GPT Images 2" />
       </div>
       <span class="category-tag">Criativo</span>
       <div class="app-name">GPT Images 2</div>
@@ -395,9 +508,9 @@
       <div class="arrow">↗</div>
     </a>
 
-    <a class="app-card" href="https://claude.ai" target="_blank" data-cat="produtividade">
+    <a class="app-card" href="https://claude.com/plugins/design" target="_blank" data-cat="produtividade">
       <div class="icon-wrap">
-        <img src="https://claude.ai/favicon.ico" alt="Claude Design" onerror="this.parentElement.classList.add('fallback');this.parentElement.innerHTML='C'" />
+        <img src="imgs/claude.ico" alt="Claude Design" />
       </div>
       <span class="category-tag">Sites</span>
       <div class="app-name">Claude Design</div>
@@ -407,7 +520,7 @@
 
     <a class="app-card" href="https://www.perplexity.ai/comet" target="_blank" data-cat="pesquisa">
       <div class="icon-wrap">
-        <img src="https://www.perplexity.ai/favicon.ico" alt="Perplexity Comet" onerror="this.parentElement.classList.add('fallback');this.parentElement.innerHTML='P'" />
+        <img src="imgs/comet.png" alt="Perplexity Comet" />
       </div>
       <span class="category-tag">Navegador</span>
       <div class="app-name">Perplexity Comet</div>
@@ -417,7 +530,7 @@
 
     <a class="app-card" href="https://granola.ai" target="_blank" data-cat="produtividade">
       <div class="icon-wrap">
-        <img src="https://granola.ai/favicon.ico" alt="Granola" onerror="this.parentElement.classList.add('fallback');this.parentElement.style.background='linear-gradient(135deg,#16a34a,#15803d)';this.parentElement.innerHTML='G'" />
+        <img src="imgs/granola.ico" alt="Granola" />
       </div>
       <span class="category-tag">Anotações</span>
       <div class="app-name">Granola</div>
@@ -427,7 +540,7 @@
 
     <a class="app-card" href="https://workspace.google.com" target="_blank" data-cat="escrita">
       <div class="icon-wrap">
-        <img src="https://www.gstatic.com/images/branding/product/1x/googleg_48dp.png" alt="Google Workspace Studio" onerror="this.parentElement.classList.add('fallback');this.parentElement.innerHTML='G'" />
+        <img src="imgs/workspace.ico" alt="Google Workspace Studio" />
       </div>
       <span class="category-tag">E-mail</span>
       <div class="app-name">Workspace Studio</div>
@@ -436,8 +549,8 @@
     </a>
 
     <a class="app-card" href="https://botninja.com.br" target="_blank" data-cat="comunicacao">
-      <div class="icon-wrap" style="background: linear-gradient(135deg,#064e3b,#065f46);">
-        <img src="https://botninja.com.br/favicon.ico" alt="BotNinja" onerror="this.parentElement.classList.add('fallback');this.parentElement.style.background='linear-gradient(135deg,#25d366,#128c7e)';this.parentElement.innerHTML='🥷'" />
+      <div class="icon-wrap">
+        <img src="imgs/botninja.ico" alt="BotNinja" />
       </div>
       <span class="category-tag">Comunicação</span>
       <div class="app-name">BotNinja</div>
@@ -447,7 +560,7 @@
 
     <a class="app-card" href="https://www.perplexity.ai" target="_blank" data-cat="pesquisa">
       <div class="icon-wrap">
-        <img src="https://www.perplexity.ai/favicon.ico" alt="Perplexity" onerror="this.parentElement.classList.add('fallback');this.parentElement.innerHTML='P'" />
+        <img src="imgs/perplexity.ico" alt="Perplexity" />
       </div>
       <span class="category-tag">Pesquisa Avançada</span>
       <div class="app-name">Perplexity Pro</div>
@@ -455,9 +568,9 @@
       <div class="arrow">↗</div>
     </a>
 
-    <a class="app-card" href="https://nanobanana.ai" target="_blank" data-cat="criativo">
-      <div class="icon-wrap" style="background: linear-gradient(135deg,#1a1a2e,#16213e);">
-        <img src="https://nanobanana.ai/favicon.ico" alt="Nano Banana 2" onerror="this.parentElement.classList.add('fallback');this.parentElement.style.background='linear-gradient(135deg,#f59e0b,#b45309)';this.parentElement.innerHTML='🍌'" />
+    <a class="app-card" href="https://nanobanana.io/nano-banana-2" target="_blank" data-cat="criativo">
+      <div class="icon-wrap">
+        <img src="imgs/nanobanana2.ico" alt="Nano Banana 2" />
       </div>
       <span class="category-tag">Geração de Imagem</span>
       <div class="app-name">Nano Banana 2</div>
@@ -490,4 +603,5 @@
     }
   </script>
 </body>
+
 </html>
